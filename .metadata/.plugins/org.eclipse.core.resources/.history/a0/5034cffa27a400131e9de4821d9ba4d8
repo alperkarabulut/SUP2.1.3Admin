@@ -1,0 +1,75 @@
+package com.acron.device;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.BasicConfigurator;
+
+import com.sybase.sup.admin.client.SUPApplication;
+import com.sybase.sup.admin.client.SUPDomain;
+import com.sybase.sup.admin.client.SUPMobileWorkflow;
+import com.sybase.sup.admin.client.SUPObjectFactory;
+import com.sybase.sup.admin.client.SUPServer;
+import com.sybase.sup.admin.context.AgentContext;
+import com.sybase.sup.admin.context.ClusterContext;
+import com.sybase.sup.admin.context.DomainContext;
+import com.sybase.sup.admin.context.ServerContext;
+import com.sybase.sup.admin.enumeration.application.APPCONNECTION;
+import com.sybase.sup.admin.filter.FilterExpression;
+import com.sybase.sup.admin.vo.PaginationResult;
+import com.sybase.sup.admin.vo.application.ApplicationConnectionVO;
+import com.sybase.sup.admin.vo.application.filter.AppConnectionFilterSortVO;
+import com.sybase.sup.admin.vo.messaging.DeviceMobileWorkflowStatusVO;
+import com.sybase.sup.admin.vo.messaging.MobileWorkflowVO;
+
+public class AssignWorkflowToOnlineDevice {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		BasicConfigurator.configure();
+		
+		AgentContext agentContext = new AgentContext(mHost, mAgentPort, mUsername, mPassword);
+		ServerContext serverContext = new ServerContext(mHost, mMngPort, mUsername, mPassword,false, agentContext);
+		ClusterContext clusterContext = serverContext.getClusterContext("relay");
+		SUPServer server = SUPObjectFactory.getSUPServer(serverContext);
+		SUPDomain domain = SUPObjectFactory.getSUPDomain(new DomainContext(serverContext.getClusterContext("relay"), "default"));
+		SUPApplication app = SUPObjectFactory.getSUPApplication(clusterContext);
+		SUPMobileWorkflow mobileWorkflow = SUPObjectFactory.getSUPMobileWorkflow(clusterContext);
+		
+		AppConnectionFilterSortVO filter = new AppConnectionFilterSortVO();
+		filter.setSortField(APPCONNECTION.APPLICATION_CONNECTION_ID);
+		filter.setFilterExpression(new FilterExpression<APPCONNECTION>().eq(APPCONNECTION.STATUS, "2"));
+
+		PaginationResult<ApplicationConnectionVO> appConnectionResult = app.getApplicationConnections( filter , 0L, 99999);
+		
+		for (MobileWorkflowVO wf : mobileWorkflow.getMobileWorkflowList()) {
+			if( wf.getDisplayName().equals("Webnak") ){
+				System.out.println( wf.getDisplayName() + " : " + wf.getDescription() + " : " + wf.getID() );
+				List<DeviceMobileWorkflowStatusVO> deviceList = mobileWorkflow.getDeviceMobileWorkflowStatus( wf.getID() );
+				List<Integer> devList = new ArrayList<Integer>();
+				
+				for (ApplicationConnectionVO appConn : appConnectionResult.getItems()) {
+					boolean addToList = true;
+					for( DeviceMobileWorkflowStatusVO device : deviceList){
+						//System.out.println( "Name: " + device.getDeviceName() + " Error Count:" + device.getErrorCount()  + " Device ID: " + device.getDeviceName() + " Transform Queue Count:" + device.getTransformQueueCount() + " - " + device.getTransformQueueStatus() + " Response Queue Count:" + device.getReponseQueueCount() + " - " + device.getResponseQueueStatus());
+						if( appConn.getNumericId().equals(device.getDeviceID()) ){
+							addToList = false;
+						}
+					}
+					if( addToList ){
+						devList.add(appConn.getNumericId());
+					}
+					
+					//mobileWorkflow.unassignMobileWorkflowFromDevices(wf.getID(), devList);
+					System.out.println("Online Device ID: " + appConn.getId() + " Status: " + appConn.getStatus() + " Pending Items: " + appConn.getPendingItems());
+				}
+				mobileWorkflow.assignMobileWorkflowToDevices( wf.getID(), devList);
+				System.out.println( wf.getDisplayName() + " uygulaması, " +  devList.size() + " adet cihaza tanımlandı.");
+			}
+		}
+
+	}
+	SUPObjectFactory.shutdown();
+}

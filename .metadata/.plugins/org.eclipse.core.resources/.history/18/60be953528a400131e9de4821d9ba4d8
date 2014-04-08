@@ -1,0 +1,35 @@
+package com.acron.device;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.TimerTask;
+
+import org.apache.log4j.BasicConfigurator;
+
+import com.sybase.sup.admin.client.SUPApplication;
+import com.sybase.sup.admin.client.SUPDomain;
+import com.sybase.sup.admin.client.SUPMobileWorkflow;
+import com.sybase.sup.admin.client.SUPObjectFactory;
+import com.sybase.sup.admin.client.SUPServer;
+import com.sybase.sup.admin.context.AgentContext;
+import com.sybase.sup.admin.context.ClusterContext;
+import com.sybase.sup.admin.context.DomainContext;
+import com.sybase.sup.admin.context.ServerContext;
+import com.sybase.sup.admin.enumeration.application.APPCONNECTION;
+import com.sybase.sup.admin.exception.SUPAdminException;
+import com.sybase.sup.admin.filter.FilterExpression;
+import com.sybase.sup.admin.vo.PaginationResult;
+import com.sybase.sup.admin.vo.application.ApplicationConnectionVO;
+import com.sybase.sup.admin.vo.application.filter.AppConnectionFilterSortVO;
+import com.sybase.sup.admin.vo.messaging.DeviceMobileWorkflowStatusVO;
+import com.sybase.sup.admin.vo.messaging.MobileWorkflowVO;
+
+public class deviceList extends TimerTask{
+
+	public static void main(String[] args){
+		
+		
+	}
+
+}

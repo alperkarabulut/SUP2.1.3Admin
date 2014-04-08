@@ -1,0 +1,30 @@
+package com.acron.device;
+
+import java.util.Date;
+import java.util.TimerTask;
+
+import com.sybase.sup.admin.exception.SUPAdminException;
+
+public class AssignDeviceTask extends TimerTask{
+	
+	private int times = 0;
+	
+	@Override
+	public void run() {
+		times++;
+		
+		if( (times < AssignDeviceApp.mTimes && AssignDeviceApp.mTimes > 0 ) || AssignDeviceApp.mTimes == 0 ){
+			System.out.println( "Task count:" + times + " Job Date: " +  new Date());
+				try {
+					AssignWF2OnlineDev job = new AssignWF2OnlineDev();
+				} catch (SUPAdminException e) {
+					e.printStackTrace();
+				}
+		}else{
+			this.cancel();
+		}
+		
+	}
+
+
+}

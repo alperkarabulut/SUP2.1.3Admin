@@ -1,0 +1,23 @@
+package com.acron.device;
+
+import java.util.TimerTask;
+
+public class AssignDeviceTask extends TimerTask{
+	
+	private int times = 0;
+	
+	@Override
+	public void run() {
+		times++;
+		
+		if( times < 99 ){
+			System.out.println( times + " . cihaz ataması");
+			AssignWorkflowToOnlineDevice job = new AssignWorkflowToOnlineDevice();
+		}else{
+			this.cancel();
+		}
+		
+	}
+
+
+}

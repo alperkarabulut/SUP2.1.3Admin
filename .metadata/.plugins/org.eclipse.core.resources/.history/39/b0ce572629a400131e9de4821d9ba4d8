@@ -1,0 +1,15 @@
+package com.acron.device;
+
+import java.util.Timer;
+
+public class AssignDeviceApp {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Timer timer = new Timer("AssignDeviceTimer");
+
+	}
+
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.client.SUPServer"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.context.ServerContext"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.vo.agent.SCCInfoVO"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.context.AgentContext"/>
+<fullyQualifiedTypeName name="org.apache.log4j.BasicConfigurator"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.context.DomainContext"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.vo.ServerVO"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.context.ClusterContext"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.vo.messaging.MobileWorkflowVO"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.vo.messaging.DeviceMobileWorkflowStatusVO"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.vo.DeviceIDsVO"/>
+<fullyQualifiedTypeName name="com.acron.device.deviceList"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.vo.application.filter.AppConnectionFilterSortVO"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.vo.application.ApplicationConnectionVO"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.enumeration.application.APPCONNECTION"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.filter.FilterExpression"/>
+<fullyQualifiedTypeName name="java.util.TimerTask"/>
+<fullyQualifiedTypeName name="com.acron.device.AssignWorkflowToOnlineDevice"/>
+<fullyQualifiedTypeName name="java.util.Timer"/>
+<fullyQualifiedTypeName name="com.acron.device.AssignDeviceTask"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.client.SUPMobileWorkflow"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.client.SUPApplication"/>
+<fullyQualifiedTypeName name="com.sybase.sup.admin.client.SUPObjectFactory"/>
+<fullyQualifiedTypeName name="com.acron.device.AssignDeviceApp"/>
+</qualifiedTypeNameHistroy>
